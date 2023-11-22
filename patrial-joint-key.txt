@@ -1,0 +1,49 @@
+0 - How well did you achieve the learning goals of this course?
+
+	0 - Extremely Well
+
+	1 - Very Well
+
+	2 - Slightly Well
+
+	3 - Not Well at All
+
+
+1 - How much did you learn from this course?
+
+	0 - A great deal
+	
+	1 - A lot 
+
+	2 - A moderate amount
+
+	3 - A little
+
+	4 - Nothing
+
+
+2 - Overall, how would you describe the quality of the instruction in this course
+
+	0 - Excellent
+
+	1 - Good
+
+	2 - Fair
+
+	3 - Poor
+
+	4 - Very Poor
+
+
+3 - How organized was this course?
+
+	0 - Extremely organized
+
+	1 - Very organized
+
+	2 - Moderately organized
+
+	3 - Slightly organized
+
+	4 - Not organized at all
+	
