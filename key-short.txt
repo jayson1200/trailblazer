@@ -1,0 +1,4 @@
+0 - How well did you achieve the learning goals of this course?
+1 - How much did you learn from this course?
+2 - Overall, how would you describe the quality of the instruction in this course
+3 - How organized was this course?
