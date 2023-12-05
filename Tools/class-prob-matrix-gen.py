@@ -7,9 +7,10 @@ with open("prob-full-matrix", "x+") as file_write:
     with open("prob-full-matrix", 'w') as file_write:
         for root, dirs, files in os.walk(root_dir):
             for dir in dirs:
-                file_write.write(dir + ",")
+                file_write.write(dir)
                 for idx in range(4):
-                    file_path = root_dir + "/" + str(idx) + "-" + dir
+                    file_path = root_dir + "/" + dir + "/" + str(idx) + "-" + dir
                     with open(file_path, "r") as curr_file:
-                        curr_file .read().split("\n")
-                        file_write.write(dir + "," + "\n")
+                        file_write.write("," + curr_file.read().replace("\n", ","))
+
+                file_write.write("\n")
