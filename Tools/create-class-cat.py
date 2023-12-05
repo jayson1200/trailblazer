@@ -2,7 +2,6 @@ import os
 import numpy as np
 
 root_dir = f"/home/meribejayson/Desktop/Projects/trailblazer/partial-joint"
-problem_paths = []
 
 with open("class-prob", "x+") as file_write:
     with open("class-prob", 'w') as file_write:
