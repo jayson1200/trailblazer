@@ -73,14 +73,15 @@ def sing_to_many(orig_cat):
     elif(orig_cat == 12):
         return [7, 12]
     elif(orig_cat == 13):
-        return [13]
+        return [100]
     elif(orig_cat == 14):
         return [9, 8, 14]
 
 
 filename = '/home/meribejayson/Desktop/Projects/trailblazer/partial-joint/class-cat'
 z_file = '/home/meribejayson/Desktop/Projects/trailblazer/partial-joint/z_like.csv'
-PREF_BIAS = 0.125
+PREF_BIAS = 0.30
+NOT_PREF_BIAS = 0.30
 POP_SIZE = 17000
 
 cat_dict = csv_to_dict(filename)
@@ -100,7 +101,7 @@ for usr_idx in range(POP_SIZE):
         if(np.any(np.in1d(np.array(sing_to_many(user_pref_cat)), cat_dict[key]))):
             user_probs.loc[key,"Z"] = user_probs.loc[key,"Z"] + PREF_BIAS
         else:
-            user_probs.loc[key,"Z"] = user_probs.loc[key,"Z"] - PREF_BIAS
+            user_probs.loc[key,"Z"] = user_probs.loc[key,"Z"] - NOT_PREF_BIAS
     
     user_probs["Z"] = sig(user_probs["Z"])
 
