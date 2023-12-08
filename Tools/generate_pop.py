@@ -28,6 +28,12 @@ Convert the numpy matrix to CSV with column labels for each class
 import numpy as np
 import pandas as pd
 import csv
+import os
+
+dirname = os.path.dirname(__file__)
+
+file_name = os.path.join(dirname, "./cs_population.csv")
+csv_dest = os.path.join(dirname, "./alg_data")
 
 
 

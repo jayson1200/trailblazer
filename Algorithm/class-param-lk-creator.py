@@ -6,9 +6,13 @@ Create a naive bayes parameter matrix for Y = 1 and Y = 0
 import numpy as np
 import pandas as pd
 from naivebayes import NaiveBayesClassifier
+import os
 
-pop_file = "/home/meribejayson/Desktop/Projects/trailblazer/Algorithm/cs_population.csv"
-csv_dest = "/home/meribejayson/Desktop/Projects/trailblazer/Algorithm/alg_data/"
+dirname = os.path.dirname(__file__)
+
+pop_file = os.path.join(dirname, "./cs_population.csv")
+csv_dest = os.path.join(dirname, "./alg_data")
+
 pop_df = pd.read_csv(pop_file)
 
 PARAMS_DIM = len(pop_df.columns)
