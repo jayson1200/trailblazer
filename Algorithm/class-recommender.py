@@ -4,9 +4,9 @@ import os
 
 dirname = os.path.dirname(__file__)
 
-x_i_y_one_file = os.path.join(dirname, "./alg_data/px_i_y_one.csv")
-x_i_y_zero_file = os.path.join(dirname, "./alg_data/px_i_y_zero.csv")
-y_one_file = os.path.join(dirname, "./alg_data/p_y_one.csv")
+x_i_y_one_file = os.path.join(dirname, r".\alg_data\px_i_y_one.csv")
+x_i_y_zero_file = os.path.join(dirname, r".\alg_data\px_i_y_zero.csv")
+y_one_file = os.path.join(dirname, r".\alg_data\p_y_one.csv")
 
 instructions = """
 

@@ -10,8 +10,8 @@ import os
 
 dirname = os.path.dirname(__file__)
 
-pop_file = os.path.join(dirname, "./cs_population.csv")
-csv_dest = os.path.join(dirname, "./alg_data")
+pop_file = os.path.join(dirname, r".\cs_population.csv")
+csv_dest = os.path.join(dirname, r".\alg_data")
 
 pop_df = pd.read_csv(pop_file)
 
@@ -42,6 +42,6 @@ df_x_i_y_0 = pd.DataFrame(X_I_Y_0_MAT, columns=col_names, index=col_names)
 df_x_i_y_1 = pd.DataFrame(X_I_Y_1_MAT, columns=col_names, index=col_names)
 df_y_1 = pd.DataFrame(Y_1_MAT, columns=col_names)
 
-df_x_i_y_0.to_csv(csv_dest + "px_i_y_zero.csv")
-df_x_i_y_1.to_csv(csv_dest + "px_i_y_one.csv")
-df_y_1.to_csv(csv_dest + "p_y_one.csv")
+df_x_i_y_0.to_csv(csv_dest + r"\px_i_y_zero.csv")
+df_x_i_y_1.to_csv(csv_dest + r"\px_i_y_one.csv")
+df_y_1.to_csv(csv_dest + r"\p_y_one.csv")

@@ -30,12 +30,11 @@ import pandas as pd
 import csv
 import os
 
+
 dirname = os.path.dirname(__file__)
 
-file_name = os.path.join(dirname, "./cs_population.csv")
-csv_dest = os.path.join(dirname, "./alg_data")
-
-
+file_name = os.path.join(dirname, r"..\partial-joint\class-cat")
+z_file = os.path.join(dirname, r"..\partial-joint\z_like.csv")
 
 # Create Dicitionary
 def csv_to_dict(filename):
@@ -83,21 +82,15 @@ def sing_to_many(orig_cat):
     elif(orig_cat == 14):
         return [9, 8, 14]
 
+PREF_BIAS = 0.15
+NOT_PREF_BIAS = 0.15
+POP_SIZE = 100000
 
-filename = '/home/meribejayson/Desktop/Projects/trailblazer/partial-joint/class-cat'
-z_file = '/home/meribejayson/Desktop/Projects/trailblazer/partial-joint/z_like.csv'
-PREF_BIAS = 0.30
-NOT_PREF_BIAS = 0.30
-POP_SIZE = 17000
-
-cat_dict = csv_to_dict(filename)
+cat_dict = csv_to_dict(file_name)
 z_file = pd.read_csv(z_file, index_col=0)
 cat_nums = np.arange(0, 15, 1)
 
-
 POP_MATRIX = np.ndarray((POP_SIZE, len(cat_dict)), dtype=np.uint8)
-
-
 
 for usr_idx in range(POP_SIZE):
     user_pref_cat = np.random.choice(cat_nums)
@@ -108,7 +101,7 @@ for usr_idx in range(POP_SIZE):
             user_probs.loc[key,"Z"] = user_probs.loc[key,"Z"] + PREF_BIAS
         else:
             user_probs.loc[key,"Z"] = user_probs.loc[key,"Z"] - NOT_PREF_BIAS
-    
+
     user_probs["Z"] = sig(user_probs["Z"])
 
     user_vec = np.array([int(np.random.binomial(1, p)) for p in user_probs["Z"]])
