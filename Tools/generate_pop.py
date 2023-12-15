@@ -29,12 +29,13 @@ import numpy as np
 import pandas as pd
 import csv
 import os
+from tqdm import tqdm 
 
 
 dirname = os.path.dirname(__file__)
 
-file_name = os.path.join(dirname, r"..\partial-joint\class-cat")
-z_file = os.path.join(dirname, r"..\partial-joint\z_like.csv")
+file_name = os.path.join(dirname, r"../partial-joint/class-cat")
+z_file = os.path.join(dirname, r"../partial-joint/z_like.csv")
 
 # Create Dicitionary
 def csv_to_dict(filename):
@@ -92,7 +93,7 @@ cat_nums = np.arange(0, 15, 1)
 
 POP_MATRIX = np.ndarray((POP_SIZE, len(cat_dict)), dtype=np.uint8)
 
-for usr_idx in range(POP_SIZE):
+for usr_idx in tqdm(range(POP_SIZE)):
     user_pref_cat = np.random.choice(cat_nums)
     user_probs = z_file.copy(deep = True)
 
