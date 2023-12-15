@@ -137,15 +137,15 @@ for usr_idx in range(POP_SIZE):
 ### **Training**
 
 To train, from my newly acquired population matrix of 0s and 1s, I picked a class to be the truth value and removed it from the population matrix. The new
-population matrix was deemed the training data I then calculated the parameters i.e. ($P(X_i \mid Y = 1)$ and $P(X_i \mid Y = 0)$), according to Naive Bayes,
+population matrix was deemed the training data I then calculated the parameters i.e. $(P(X_i \mid Y = 1) \text{ and } P(X_i \mid Y = 0))$, according to Naive Bayes,
 and appended them to two paramter matrices—one representing of $X_i$ if $Y = 1$ and the other represent $Y = 0$. At this point, I had two matrices with the
 following structure:
 
-$PARAM\_MATRIXYone_{i,j}$ represents the probability that a student would like class $X_j$ given that they like $X_i$
+$PARAMMATRIXYone_{i,j}$ represents the probability that a student would like class $X_j$ given that they like $X_i$
 
 The other matrix represents the opposite. that is:
 
-$PARAM\_MATRIXYzero_{i,j}$ represents the probability that a student would like class $X_j$ given that they did not like $X_i$
+$PARAMMATRIXYzero_{i,j}$ represents the probability that a student would like class $X_j$ given that they did not like $X_i$
 
 ### **Prediction**
 
