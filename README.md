@@ -29,22 +29,22 @@ I did the following:
 As you can see, for a particular class, I just append the probability values to a vector then add that vector to a matrix.
 
 ```python
-    import os
-    import numpy as np
+import os
+import numpy as np
 
-    root_dir = f"PATH"
+root_dir = f"PATH"
 
-    with open("prob-full-matrix", "x+") as file_write:
-        with open("prob-full-matrix", 'w') as file_write:
-            for root, dirs, files in os.walk(root_dir):
-                for dir in dirs:
-                    file_write.write(dir)
-                    for idx in range(4):
-                        file_path = root_dir + "/" + dir + "/" + str(idx) + "-" + dir
-                        with open(file_path, "r") as curr_file:
-                            file_write.write("," + curr_file.read().replace("\n", ","))
+with open("prob-full-matrix", "x+") as file_write:
+    with open("prob-full-matrix", 'w') as file_write:
+        for root, dirs, files in os.walk(root_dir):
+            for dir in dirs:
+                file_write.write(dir)
+                for idx in range(4):
+                    file_path = root_dir + "/" + dir + "/" + str(idx) + "-" + dir
+                    with open(file_path, "r") as curr_file:
+                        file_write.write("," + curr_file.read().replace("\n", ","))
 
-                    file_write.write("\n")
+                file_write.write("\n")
 ```
 
 Next, I used PCA to condense the each class vector into a z value which would be plugged into a $\sigma$ function to obtain a probability:
@@ -55,35 +55,35 @@ each the first principle component, the result of which I used as a z-value for 
 a class.
 
 ```python
-    import pandas as pd
-    import numpy as np
+import pandas as pd
+import numpy as np
 
 
-    df = pd.read_csv("./prob-full-matrix", index_col=0, names=np.arange(0, 20, 1, dtype=int))
-    PROB_MATRIX = df.to_numpy()
+df = pd.read_csv("./prob-full-matrix", index_col=0, names=np.arange(0, 20, 1, dtype=int))
+PROB_MATRIX = df.to_numpy()
 
-    for i in range(PROB_MATRIX.shape[1]):
-        mean = np.sum(PROB_MATRIX[:, i]) / PROB_MATRIX.shape[1]
-        PROB_MATRIX[:, i] = PROB_MATRIX[:, i] - mean
+for i in range(PROB_MATRIX.shape[1]):
+    mean = np.sum(PROB_MATRIX[:, i]) / PROB_MATRIX.shape[1]
+    PROB_MATRIX[:, i] = PROB_MATRIX[:, i] - mean
 
-    COV_MATRIX = (1/(PROB_MATRIX.shape[0]-1)) * (PROB_MATRIX.T @ PROB_MATRIX)
-    U, S, V = np.linalg.svd(COV_MATRIX)
+COV_MATRIX = (1/(PROB_MATRIX.shape[0]-1)) * (PROB_MATRIX.T @ PROB_MATRIX)
+U, S, V = np.linalg.svd(COV_MATRIX)
 
-    print(f"{S[0]/np.sum(S)}% variance is exaplained by the first principal component.")
+print(f"{S[0]/np.sum(S)}% variance is exaplained by the first principal component.")
 
-    first_pc = U[:, 1]
-    first_pc
-    relative_probs = (first_pc.reshape(1, 20) @ PROB_MATRIX.T)
-    dict = {"Class":df.index.to_numpy(), "Z": relative_probs.flatten()}
-    z_df = pd.DataFrame(dict)
+first_pc = U[:, 1]
+first_pc
+relative_probs = (first_pc.reshape(1, 20) @ PROB_MATRIX.T)
+dict = {"Class":df.index.to_numpy(), "Z": relative_probs.flatten()}
+z_df = pd.DataFrame(dict)
 
-    def sig(z):
-        return 1 / (1 + np.exp(-z))
+def sig(z):
+    return 1 / (1 + np.exp(-z))
 
-    dict = {"Class":df.index.to_numpy(), "Prob": sig(relative_probs.flatten())}
+dict = {"Class":df.index.to_numpy(), "Prob": sig(relative_probs.flatten())}
 
-    prob_df = pd.DataFrame(dict)
-    z_df.to_csv("z_like.csv", index=False)
+prob_df = pd.DataFrame(dict)
+z_df.to_csv("z_like.csv", index=False)
 ```
 
 ### Simulating CS Population
@@ -117,7 +117,7 @@ matrix and repeated the aforementioned steps 17000 times.
 Here is a snippet for some details
 
 ```python
-    for usr_idx in range(POP_SIZE):
+for usr_idx in range(POP_SIZE):
     user_pref_cat = np.random.choice(cat_nums)
     user_probs = z_file.copy(deep = True)
 
@@ -141,11 +141,11 @@ population matrix was deemed the training data I then calculated the parameters 
 and appended them to two paramter matrices—one representing of $X_i$ if $Y = 1$ and the other represent $Y = 0$. At this point, I had two matrices with the
 following structure:
 
-$PARAM\_MATRIX_{i,j}$ represents the probability that a student would like class $X_j$ given that they like $X_i$
+$PARAM\_MATRIXYone_{i,j}$ represents the probability that a student would like class $X_j$ given that they like $X_i$
 
 The other matrix represents the opposite. that is:
 
-$PARAM\_MATRIX_{i,j}$ represents the probability that a student would like class $X_j$ given that they did not like $X_i$
+$PARAM\_MATRIXYzero_{i,j}$ represents the probability that a student would like class $X_j$ given that they did not like $X_i$
 
 ### **Prediction**
 
@@ -154,3 +154,10 @@ not taken and calculated the probability that they would like the class given th
 naive bayes assumption. I did the same for whether they would not like the class they haven't taken before. I then combined both
 value into a log odds and appended it to a list. After looping, I sorted the log odds and reported ones that were the largest and
 smallest.
+
+### To try it
+
+I didn't have enough time to make a website, so the code is available [here](https://github.com/jayson1200/trailblazer.git).
+To run it, all you have to do is change all of the paths at the top of the file to correct paths for your system and run
+lass-recommender.py the Algorithm folder via python in an environment that has pandas and numpy. If you have any suggestions,
+please contact me at jmeribe@stanford.edu. I am very interested in improving recommendations.
